@@ -1,0 +1,22 @@
+{
+  "name": "fsdconferenceapp",
+  "version": "1.0.0",
+  "description": "Full stack development Conference App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lictorpro/FPIS-projekat-2024.git"
+  },
+  "author": "David Mijić",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lictorpro/FPIS-projekat-2024/issues"
+  },
+  "homepage": "https://github.com/Lictorpro/FPIS-projekat-2024#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
