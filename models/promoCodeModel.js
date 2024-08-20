@@ -6,7 +6,7 @@ const promoCodeSchema = new mongoose.Schema({
     required: [true, 'Promo code must have a defined code.'],
     trim: true,
   },
-  used: {
+  isUsed: {
     type: Boolean,
     default: false,
     trim: true,

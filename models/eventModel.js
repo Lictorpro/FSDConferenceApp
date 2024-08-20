@@ -7,6 +7,16 @@ const eventSchema = new mongoose.Schema({
     unique: true,
     trim: true,
   },
+  city: {
+    type: String,
+    required: [true, 'Event must have a city.'],
+    trim: true,
+  },
+  address: {
+    type: String,
+    required: [true, 'Event must have an address.'],
+    trim: true,
+  },
   eventDate: {
     type: Date,
     required: [true, 'Event must have a date.'],
@@ -34,6 +44,14 @@ const eventSchema = new mongoose.Schema({
     default: Date.now(),
     select: false,
   },
+});
+
+eventSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'presenters',
+    select: '-__v',
+  });
+  next();
 });
 
 const Event = mongoose.model('Event', eventSchema);

@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
     select: false,
     validate: {
       validator: function (el) {
-        return el === this.password;
+        return el === this.email;
       },
       message: 'Emails are not the same!',
     },
@@ -67,16 +67,19 @@ const userSchema = new mongoose.Schema({
     ref: 'PromoCode',
     unique: true,
   },
-  events: [
+  registrations: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: 'Event',
+      ref: 'Registration',
     },
   ],
   usedPromoCode: {
     type: mongoose.Schema.ObjectId,
     ref: 'PromoCode',
-    unique: true,
+    index: {
+      unique: true,
+      partialFilterExpression: { usedPromoCode: { $type: 'string' } },
+    },
   },
   debt: {
     type: Number,
@@ -91,6 +94,18 @@ const userSchema = new mongoose.Schema({
     default: Date.now(),
     select: false,
   },
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'promoCode',
+    select: '-__v',
+  });
+  this.populate({
+    path: 'usedPromoCode',
+    select: '-__v',
+  });
+  next();
 });
 
 const User = mongoose.model('User', userSchema);
