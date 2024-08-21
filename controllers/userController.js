@@ -34,7 +34,6 @@ exports.register = catchAsync(async (req, res, next) => {
     const [newPromoCode] = await PromoCode.create([{ code: promoCode }], {
       session,
     });
-    console.log(newPromoCode);
     let usedPromoCode = null;
 
     const events = [...req.body.events];
@@ -116,4 +115,23 @@ exports.register = catchAsync(async (req, res, next) => {
     session.endSession();
     return next(error);
   }
+});
+
+exports.cancelRegistration = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+
+  if (!user) {
+    return next(new AppError('No user found with passed id!', 404));
+  }
+
+  const promoCode = await PromoCode.findById(user.promoCode);
+  user.active = false;
+  promoCode.isUsed = true;
+  user.save();
+  promoCode.save();
+
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
 });
