@@ -120,8 +120,8 @@ exports.register = catchAsync(async (req, res, next) => {
 exports.cancelRegistration = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.userId);
 
-  if (!user) {
-    return next(new AppError('No user found with passed id!', 404));
+  if (!user.active) {
+    return next(new AppError('This user does not exist anymore!', 404));
   }
 
   const promoCode = await PromoCode.findById(user.promoCode);
@@ -134,4 +134,46 @@ exports.cancelRegistration = catchAsync(async (req, res, next) => {
     status: 'success',
     data: null,
   });
+});
+
+exports.changeRegistration = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+
+  if (!user.active) {
+    return next(new AppError('This user does not exist anymore!', 404));
+  }
+
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const events = [...req.body.events];
+    let registrations = [];
+    for (const event of events) {
+      const registration = await Registration.create([{ event: event }], {
+        session,
+      });
+      registrations.push(registration[0]._id);
+    }
+
+    user.registrations = registrations;
+    await user.save({ session });
+
+    await session.commitTransaction();
+    session.endSession();
+
+    res.status(200).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    return next(error);
+  }
+});
+
+exports.authenticateUser = catchAsync(async (req, res, next) => { 
+  //Pronadji usera u odnosu na email i password
+  //A
 });

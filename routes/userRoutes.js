@@ -11,4 +11,8 @@ router.route('/:id').get(userController.getUser);
 
 router.route('/cancel/:userId').post(userController.cancelRegistration);
 
+router
+  .route('/changeRegistration/:userId')
+  .put(userController.changeRegistration);
+
 module.exports = router;
