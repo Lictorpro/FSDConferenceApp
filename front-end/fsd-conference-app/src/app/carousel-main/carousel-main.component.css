@@ -1,0 +1,8 @@
+c-carousel-item {
+  height: 500px;
+  width: 100%;
+}
+img {
+  max-height: 100%;
+  height: auto; 
+}

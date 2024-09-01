@@ -40,7 +40,7 @@ exports.createOne = (Model) =>
 
 exports.getOne = (Model, populateOptions) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
+    let query = Model.findById(req.params.id).select('-__v');
     if (populateOptions) query = query.populate(populateOptions);
     const doc = await query;
 
@@ -56,7 +56,7 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.find();
+    const doc = await Model.find().select('-__v');
 
     res.status(200).json({
       status: 'success',

@@ -1,0 +1,53 @@
+h1 {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+img {
+  max-height: 400px;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+p,
+ul {
+  font-size: 18px;
+}
+h2 {
+  font-size: 20px;
+}
+.divider {
+  position: relative;
+  margin-top: 90px;
+  height: 1px;
+}
+
+.div-transparent:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgb(48, 49, 51),
+    transparent
+  );
+}
+
+.event-card {
+  max-width: 700px;
+  margin-bottom: 8px;
+}
+i {
+  font-size: 50px;
+  margin-right: 20px;
+  color: #536dfe;
+}
+li {
+  padding-top: 10px;
+}

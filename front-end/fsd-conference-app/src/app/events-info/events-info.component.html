@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row justify-content-center pt-4">
+        <div class="col-4 text-center">
+            <h1>Events</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-around">
+        @for (event of events; track event._id) {
+        <div class="col-4">
+            <mat-card class="event-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <mat-card-title><b>{{event.name}}</b></mat-card-title>
+                        <mat-card-subtitle>{{event.eventDate | date}}</mat-card-subtitle>
+                        <i mat-card-avatar class="material-icons">code</i>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content>
+                    <ul>
+                        <li><b>Location</b>: {{event.city + ', ' + event.address}}</li>
+                        <li><b>Maximum number of seats</b>: {{event.numberOfVisitors}}</li>
+                        <li><b>Available seats left</b>: {{event.availableSeats}}</li>
+                        <li><b>Discount date</b>: {{event.discountDate | date}}</li>
+                        <li><b>Price</b>: {{event.price}} RSD</li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        }
+    </div>
+</div>

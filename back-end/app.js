@@ -9,6 +9,7 @@ const eventRouter = require('./routes/eventRoutes');
 const userRouter = require('./routes/userRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const eventController = require('./controllers/eventController');
 
 const app = express();
 
@@ -20,10 +21,18 @@ const limiter = rateLimit({
   message: `Too many requests from this IP, please try again in an hour!`,
 });
 
+var allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+};
+
 app.use('/api', limiter);
 app.use(express.json({ limit: '10kb' }));
 app.use(mongoSanitize());
 app.use(xss());
+app.use(allowCrossDomain);
 
 app.use('/api/v1/presenters', presenterRouter);
 app.use('/api/v1/promoCodes', promoCodeRouter);
