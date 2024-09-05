@@ -1,0 +1,42 @@
+.action-card {
+  max-width: 700px;
+  margin-bottom: 8px;
+}
+h1 {
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+i {
+  font-size: 60px;
+  color: #536dfe;
+}
+.mdc-button {
+  height: 50px !important;
+  width: 90% !important;
+  font-size: 18px !important;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.green {
+  background-color: green !important;
+  color: white !important;
+}
+.debt {
+  color: green;
+}
+.red {
+  background-color: rgb(173, 41, 41) !important;
+  color: white !important;
+}
+.cancel {
+  color: rgb(173, 41, 41);
+}

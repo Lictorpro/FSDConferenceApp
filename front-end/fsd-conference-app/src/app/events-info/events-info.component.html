@@ -24,9 +24,33 @@
                         <li><b>Discount date</b>: {{event.discountDate | date}}</li>
                         <li><b>Price</b>: {{event.price}} RSD</li>
                     </ul>
+
+                    <table mat-table [dataSource]="event.presenters" class="mat-elevation-z8">
+
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="presenter">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Presenter </th>
+                            <td mat-cell *matCellDef="let presenter" class="text-center"> {{presenter.firstName + " " +
+                                presenter.lastName}}
+                            </td>
+                        </ng-container>
+
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="presentationTime">
+                            <th mat-header-cell *matHeaderCellDef class="text-center"> Time </th>
+                            <td mat-cell *matCellDef="let presenter" class="text-center"> {{presenter.presentationTime}}
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    </table>
+
                 </mat-card-content>
             </mat-card>
         </div>
         }
     </div>
 </div>
+<div class="divider div-transparent"></div>

@@ -2,9 +2,10 @@
   max-height: 100%;
   height: auto;
   padding-right: 20px;
+  cursor: pointer;
 }
 mat-toolbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: 1000;
 }

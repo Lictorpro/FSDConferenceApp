@@ -51,3 +51,30 @@ i {
 li {
   padding-top: 10px;
 }
+.mat-mdc-row:nth-child(even) {
+  background-color: rgb(225, 206, 243) !important;
+}
+.mat-mdc-header-cell {
+  background-color: #6f08b4 !important;
+  color: white;
+}
+.divider {
+  position: relative;
+  margin-top: 90px;
+  height: 1px;
+}
+.div-transparent:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgb(48, 49, 51),
+    transparent
+  );
+}

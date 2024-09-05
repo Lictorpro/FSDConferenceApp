@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row justify-content-center pt-4">
+        <div class="col-4 text-center">
+            <h1>Actions</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-around">
+        <div class="col-3">
+            <mat-card class="action-card" appearance="outlined">
+                <mat-card-header class="justify-content-center">
+                    <i mat-card-avatar class="material-icons">how_to_reg</i>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="button-container">
+                        <a mat-flat-button routerLink="/register" color="primary">Register for event</a>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-3">
+            <mat-card class="action-card" appearance="outlined">
+                <mat-card-header class="justify-content-center">
+                    <i mat-card-avatar class="material-icons">edit_note</i>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="button-container">
+                        <a mat-flat-button color="primary">Change
+                            registration</a>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-3">
+            <mat-card class="action-card" appearance="outlined">
+                <mat-card-header class="justify-content-center">
+                    <i mat-card-avatar class="material-icons cancel">delete_forever</i>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="button-container">
+                        <a mat-flat-button class="red" routerLink="/cancel-registration">Cancel
+                            registration</a>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-3">
+            <mat-card class="action-card" appearance="outlined">
+                <mat-card-header class="justify-content-center">
+                    <i mat-card-avatar class="material-icons debt">receipt_long</i>
+                </mat-card-header>
+                <mat-card-content>
+                    <div class="button-container">
+                        <a mat-flat-button class="green" href="https://www.google.com/" target="_blank">Get debt</a>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
