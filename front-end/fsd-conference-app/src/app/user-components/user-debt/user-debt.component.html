@@ -1,0 +1,74 @@
+<app-header />
+<div class="container stepper justify-content-center">
+    <h1>Check your debt</h1>
+    <mat-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="form" [editable]="editableStep1">
+            <div class="container">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(stepper)">
+                    <ng-template matStepLabel>Authenticate</ng-template>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" type="email" formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Access token</mat-label>
+                        <input matInput placeholder="Access token" type="input" formControlName="accessToken">
+                    </mat-form-field>
+
+
+                    <div>
+
+                        <button mat-flat-button color="primary">Next</button>
+                    </div>
+                </form>
+
+                @if(emailIsInvalid){
+                <p class="error-message">Please enter valid email.</p>
+                }
+
+                @if(accessTokenIsInvalid){
+                <p class="error-message">Access token is required.</p>
+                }
+                @if(isError){
+                <p class="error-message">{{errorMessage}}</p>
+                }
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <div class="container">
+                <ng-template matStepLabel>Your debt</ng-template>
+                <div>
+                    <mat-card appearance="outlined">
+                        <mat-card-header class="justify-content-center">
+                            <h1>Check</h1>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h3>Events</h3>
+                            <ol>
+                                @for (event of userDebt?.events; track event) {
+                                <li>{{event.event}}: {{event.originalPrice}} RSD - {{event.discountAmount}} RSD
+                                    ({{event.discount || '0%'}}) = <span class="bold">{{event.debt}} RSD</span></li>
+                                }
+                            </ol>
+                            @if(userDebt?.twoDayDiscount != undefined){
+                            <p>Two day discount: <span class="bold">-{{userDebt?.twoDayDiscount?.discountAmount}}
+                                    RSD</span>
+                                ({{userDebt?.twoDayDiscount?.discount}})</p>
+                            }
+                            @if(userDebt?.promoCodeDiscount != undefined){
+                            <p>Promo code discount: <span class="bold">-{{userDebt?.promoCodeDiscount?.discountAmount}}
+                                    RSD</span>
+                                ({{userDebt?.promoCodeDiscount?.discount}})</p>
+                            }
+                            <hr>
+                            <p>Total: <span class="bold">{{userDebt?.totalDebt}} RSD</span></p>
+                        </mat-card-content>
+                    </mat-card>
+                    <button mat-button mat-flat-button color="primary" (click)="goHome()">Done</button>
+                </div>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

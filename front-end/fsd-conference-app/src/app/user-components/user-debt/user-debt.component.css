@@ -1,8 +1,9 @@
 .stepper {
   margin-top: 100px;
 }
-form {
+mat-card {
   margin-top: 20px;
+  width: 100%;
 }
 mat-form-field {
   width: 100%;
@@ -15,7 +16,7 @@ h1 {
 }
 h3 {
   font-weight: bold;
-  text-align: center;
+  text-align: left;
 }
 .container {
   display: flex;
@@ -37,10 +38,9 @@ button {
   margin-bottom: 0;
   display: block;
 }
-
-i {
-  font-size: 100px;
-  color: green;
-  display: block;
-  margin: auto;
+ol {
+  padding-left: 15px;
+}
+.bold {
+  font-weight: bold;
 }

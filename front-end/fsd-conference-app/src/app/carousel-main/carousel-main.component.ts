@@ -23,13 +23,13 @@ export class CarouselMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.slides[0] = {
-      src: 'angular.jpg'
+      src: 'carousel-1.jpg'
     };
     this.slides[1] = {
-      src: 'react.jpg'
+      src: 'carousel-2.jpg'
     };
     this.slides[2] = {
-      src: 'vue.jpg'
+      src: 'carousel-3.png'
     };
   }
 

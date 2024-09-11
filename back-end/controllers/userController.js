@@ -30,6 +30,11 @@ exports.register = catchAsync(async (req, res, next) => {
   session.startTransaction();
   try {
     const events = [...req.body.events];
+    if (events.length < 1) {
+      await session.abortTransaction();
+      session.endSession();
+      return next(new AppError(`You must select atleast one event!`, 500));
+    }
     let registrations = [];
     for (const event of events) {
       const eventData = await Event.findById(event).session(session);
@@ -49,6 +54,7 @@ exports.register = catchAsync(async (req, res, next) => {
       registrations.push(registration[0]._id);
     }
 
+    let usedPromoCode = null;
     //Logika za koriscenje promo koda
     if (req.body.usedPromoCode) {
       usedPromoCode = await PromoCode.findOne({
@@ -64,8 +70,19 @@ exports.register = catchAsync(async (req, res, next) => {
           )
         );
       } else {
-        usedPromoCode.isUsed = true;
-        await usedPromoCode.save({ session });
+        if (usedPromoCode.isUsed) {
+          await session.abortTransaction();
+          session.endSession();
+          return next(
+            new AppError(
+              `Promo code: ${req.body.usedPromoCode} is already used!`,
+              500
+            )
+          );
+        } else {
+          usedPromoCode.isUsed = true;
+          await usedPromoCode.save({ session });
+        }
       }
     }
     //kraj
@@ -77,7 +94,7 @@ exports.register = catchAsync(async (req, res, next) => {
     const [newPromoCode] = await PromoCode.create([{ code: promoCode }], {
       session,
     });
-    let usedPromoCode = null;
+    //let usedPromoCode = null;
 
     const [newUser] = await User.create(
       [
@@ -151,7 +168,7 @@ exports.cancelRegistration = catchAsync(async (req, res, next) => {
   user.save();
   promoCode.save();
 
-  res.status(204).json({
+  res.status(200).json({
     status: 'success',
     data: null,
   });

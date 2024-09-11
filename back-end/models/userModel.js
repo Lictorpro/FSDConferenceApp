@@ -105,6 +105,10 @@ userSchema.pre(/^find/, function (next) {
     path: 'usedPromoCode',
     select: '-__v',
   });
+  this.populate({
+    path: 'registrations',
+    select: '-__v',
+  });
   next();
 });
 

@@ -1,0 +1,13 @@
+i {
+  font-size: 100px;
+  color: green;
+  display: block;
+  margin: auto;
+}
+h2 {
+  padding: 15px;
+}
+mat-dialog-content {
+  width: 450px;
+  text-align: center;
+}

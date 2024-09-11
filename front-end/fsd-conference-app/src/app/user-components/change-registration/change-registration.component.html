@@ -1,6 +1,6 @@
 <app-header />
 <div class="container stepper justify-content-center">
-    <h1>Cancel registration</h1>
+    <h1>Change registration</h1>
     <mat-stepper [linear]="true" #stepper>
         <mat-step [stepControl]="form" [editable]="editableStep1">
             <div class="container">
@@ -39,21 +39,21 @@
         <mat-step [editable]="editableStep1">
             <div class="container">
 
-                <form [formGroup]="confirmForm" (ngSubmit)="onConfirm(stepper)">
-                    <ng-template matStepLabel>Confirm cancelation</ng-template>
-                    <h3>To cancel registration enter phrase "I UNDERSTAND". After this you will not be able to register
-                        to
-                        events.</h3>
-                    <mat-form-field>
-                        <mat-label>Enter phrase</mat-label>
-                        <input matInput placeholder="I UNDERSTAND" type="input" formControlName="confirm">
-                    </mat-form-field>
+                <form [formGroup]="changeRegForm" (ngSubmit)="onChangeReg(stepper)">
+                    <ng-template matStepLabel>Change event selection</ng-template>
+                    <section class="events-section" formArrayName="events">
+                        <h2>Events</h2>
+                        @for (event of events; track event._id; let idx = $index) {
+                        <mat-checkbox class="events-margin" [value]="event._id" [formControlName]="idx">{{ event.name
+                            }}</mat-checkbox>
+                        }
+                    </section>
                     <div>
                         <button mat-flat-button color="primary">Next</button>
                     </div>
                 </form>
-                @if(confirmIsInvalid){
-                <p class="error-message">Please enter a valid phrase!</p>
+                @if(isError){
+                <p class="error-message">{{errorMessage}}</p>
                 }
             </div>
         </mat-step>
